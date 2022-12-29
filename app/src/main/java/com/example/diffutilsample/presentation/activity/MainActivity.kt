@@ -1,4 +1,4 @@
-package com.example.diffutilsample.view.activities
+package com.example.diffutilsample.presentation.activity
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
@@ -7,15 +7,16 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AnimationUtils
 import android.view.animation.AnticipateOvershootInterpolator
 import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.diffutilsample.R
 import com.example.diffutilsample.databinding.ActivityMainBinding
 import com.example.diffutilsample.model.Word
+import com.example.diffutilsample.presentation.adapter.WordAdapter
+import com.example.diffutilsample.presentation.viewmodel.HeroesViewModel
 import com.example.diffutilsample.utils.DELAY_ANIM
 import com.example.diffutilsample.utils.LIST_KEY
-import com.example.diffutilsample.view.adapter.WordAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,8 +34,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val wordAdapter by lazy { WordAdapter() }
     private lateinit var runnable: Runnable
-    private lateinit var vm : MainViewModel
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         imgOne = binding.imgAnimation1
         imgTwo = binding.imgAnimation2
 
-        vm = ViewModelProvider(this).get(MainViewModel::class.java)
+        //vm = ViewModelProvider(this).get(MainViewModel::class.java)
 
         setAdapter()
 
@@ -86,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                 .withEndAction {
                     imgTwo.scaleX = 0.8f
                     imgTwo.scaleY = 0.8f
-                   imgTwo.alpha = 0.8f
+                    imgTwo.alpha = 0.8f
                 }
         }
     }

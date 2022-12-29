@@ -1,4 +1,4 @@
-package com.example.diffutilsample.view.adapter
+package com.example.diffutilsample.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

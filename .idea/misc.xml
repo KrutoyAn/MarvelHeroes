@@ -16,6 +16,11 @@
         <entry key="..\:/Android_Projects/RecycleView/app/src/main/res/drawable/round_button_red.xml" value="0.1105" />
         <entry key="..\:/Android_Projects/RecycleView/app/src/main/res/layout/activity_main.xml" value="0.1468227424749164" />
         <entry key="..\:/Android_Projects/RecycleView/app/src/main/res/layout/row_item.xml" value="0.264" />
+        <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.104" />
+        <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/activity_heroes.xml" value="0.21851851851851853" />
+        <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/activity_main.xml" value="0.21851851851851853" />
+        <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/hero_item.xml" value="0.1" />
+        <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/row_item.xml" value="0.21851851851851853" />
       </map>
     </option>
   </component>
