@@ -6,10 +6,12 @@ import com.example.diffutilsample.data.service.HeroService
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
 @Singleton
 class HeroRepository @Inject constructor(
     private val heroService: HeroService
 ) {
+
 
     suspend fun loadHeroes(): GreatResult<HeroResponseDto> {
         return GreatResult.Success(heroService.getHeroesAsync())

@@ -13,6 +13,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.HeroesViewHolder>() {
 
+
     var heroesList = emptyList<HeroResponse>()
         private set
 

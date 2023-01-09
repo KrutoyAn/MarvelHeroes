@@ -3,7 +3,6 @@ package com.example.diffutilsample.presentation.adapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.diffutilsample.model.Word
 
-
 class WordDiffUtil(
     private val oldList: List<Word>,
     private val newList: List<Word>

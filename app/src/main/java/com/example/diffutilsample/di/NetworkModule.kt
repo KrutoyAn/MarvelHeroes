@@ -39,6 +39,7 @@ object NetworkModule {
             .create(HeroService::class.java)
     }
 
+
     @Provides
     @Singleton
     fun provideOtherInterceptorOkHttpClient(

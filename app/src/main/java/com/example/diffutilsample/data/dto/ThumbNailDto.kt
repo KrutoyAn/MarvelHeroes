@@ -3,6 +3,7 @@ package com.example.diffutilsample.data.dto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
 data class ThumbNailDto(
     @SerialName("extension")
@@ -10,6 +11,7 @@ data class ThumbNailDto(
     @SerialName("path")
     val path: String,
 )
+
 
 fun ThumbNailDto.getImageUrl(): String {
     return "${this.path}.${this.extension}"

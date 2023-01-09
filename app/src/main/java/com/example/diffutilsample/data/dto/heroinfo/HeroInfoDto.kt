@@ -8,4 +8,10 @@ import kotlinx.serialization.Serializable
 data class HeroInfoDto(
     @SerialName("name")
     val name: String,
+    @SerialName("description")
+    val description: String,
+    @SerialName("thumbnail")
+    val thumbnail: ThumbNailDto,
+    @SerialName("comics")
+    val comicsDto: ComicsDto
 )

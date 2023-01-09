@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.diffutilsample.data.dto.GreatResult
 import com.example.diffutilsample.databinding.ActivityHeroesBinding
@@ -30,7 +31,7 @@ class HeroesActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.heroesRecycler.adapter = adapter
-        binding.heroesRecycler.layoutManager = LinearLayoutManager(this)
+        binding.heroesRecycler.layoutManager = GridLayoutManager(this,2)
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 when (val result = viewModel.fetchHeroes()) {

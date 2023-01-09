@@ -8,6 +8,7 @@ import com.example.diffutilsample.data.repository.HeroRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+
 @HiltViewModel
 class HeroesViewModel
 @Inject constructor(

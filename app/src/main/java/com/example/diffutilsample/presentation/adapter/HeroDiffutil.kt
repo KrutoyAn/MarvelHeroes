@@ -5,6 +5,7 @@ import com.example.diffutilsample.data.dto.heroinfo.HeroResponse
 import com.example.diffutilsample.data.dto.heroinfo.HeroResponseDto
 
 
+
 class HeroDiffutil(
     private val oldList: List<HeroResponse>,
     private val newList: List<HeroResponse>
