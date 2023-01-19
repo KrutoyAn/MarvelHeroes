@@ -36,4 +36,9 @@
         <item name="android:background">@drawable/round_button_red</item>
     </style>
 
+    <!--load background-->
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/marvel</item>
+    </style>
+
 </resources>

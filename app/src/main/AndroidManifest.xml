@@ -16,6 +16,7 @@
         android:theme="@style/Theme.DiffUtilSample">
         <activity
             android:name=".presentation.activity.HeroesActivity"
+            android:theme="@style/SplashTheme"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"

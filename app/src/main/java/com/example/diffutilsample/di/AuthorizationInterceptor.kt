@@ -19,11 +19,11 @@ open class AuthorizationInterceptor : Interceptor {
         val url = request.url.newBuilder()
             .addQueryParameter(
                 AUTHORIZATION_HEADER,
-                "none"
+                "497afb84acc8ba25b849461b510d5cc1"
             )
             .addQueryParameter(
                 HASH,
-                "none"
+                "d7218865ddcf306a5e181d4023626660"
             )
             .build()
         request = request.newBuilder().url(url).build()
