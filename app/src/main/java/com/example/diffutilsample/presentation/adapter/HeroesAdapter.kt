@@ -6,15 +6,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.diffutilsample.data.dto.getImageUrl
-import com.example.diffutilsample.data.dto.heroinfo.HeroResponse
 import com.example.diffutilsample.databinding.HeroItemBinding
+import com.example.diffutilsample.presentation.model.HeroModel
+import com.example.diffutilsample.presentation.model.getImageUrl
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.HeroesViewHolder>() {
 
 
-    var heroesList = emptyList<HeroResponse>()
+    var heroesList = emptyList<HeroModel>()
         private set
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroesViewHolder {
@@ -34,7 +34,7 @@ class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.HeroesViewHolder>() {
         return heroesList.size
     }
 
-    fun setData(newHeroes: List<HeroResponse>) {
+    fun setData(newHeroes: List<HeroModel>) {
         val diffUtil = HeroDiffutil(heroesList, newHeroes)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
         heroesList = newHeroes
@@ -44,7 +44,7 @@ class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.HeroesViewHolder>() {
     class HeroesViewHolder(private val binding: HeroItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: HeroResponse) {
+        fun bind(item: HeroModel) {
             binding.heroTitle.text = item.name
             Glide.with(binding.heroImage.context)
                 .load(item.thumbnail.getImageUrl())

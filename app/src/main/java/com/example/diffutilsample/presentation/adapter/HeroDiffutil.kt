@@ -1,14 +1,12 @@
 package com.example.diffutilsample.presentation.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.diffutilsample.data.dto.heroinfo.HeroResponse
-import com.example.diffutilsample.data.dto.heroinfo.HeroResponseDto
-
+import com.example.diffutilsample.presentation.model.HeroModel
 
 
 class HeroDiffutil(
-    private val oldList: List<HeroResponse>,
-    private val newList: List<HeroResponse>
+    private val oldList: List<HeroModel>,
+    private val newList: List<HeroModel>
 ) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {

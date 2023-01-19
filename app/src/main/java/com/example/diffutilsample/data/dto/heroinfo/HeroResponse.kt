@@ -14,3 +14,18 @@ data class HeroResponse(
     @SerialName("id")
     val id: Long
 )
+
+fun HeroResponse.mapToEntity(): HeroEntity {
+    return HeroEntity(
+        id = id,
+        name = name,
+        thumbnail = thumbnail.mapToThumbnailEntity()
+    )
+}
+
+fun ThumbNailDto.mapToThumbnailEntity(): ThumbNailEntity {
+    return ThumbNailEntity(
+        extension = extension,
+        path = path
+    )
+}
