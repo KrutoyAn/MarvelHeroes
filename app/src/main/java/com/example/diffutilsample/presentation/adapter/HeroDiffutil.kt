@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.diffutilsample.presentation.model.HeroModel
 
 
+
 class HeroDiffutil(
     private val oldList: List<HeroModel>,
     private val newList: List<HeroModel>

@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".presentation.activity.HeroesActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/marvel"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/heroes_recycler"
         android:layout_width="match_parent"

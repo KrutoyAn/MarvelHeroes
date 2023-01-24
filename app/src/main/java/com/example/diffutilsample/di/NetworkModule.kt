@@ -1,8 +1,8 @@
-package com.an9ar.jetheroes.di
+package com.example.diffutilsample.di
 
+import com.an9ar.jetheroes.di.TimeStampInterceptor
 import com.example.diffutilsample.interceptors.HeaderInterceptor
 import com.example.diffutilsample.data.service.HeroService
-import com.example.diffutilsample.di.AuthorizationInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -24,6 +24,7 @@ object NetworkModule {
         ignoreUnknownKeys = true
         isLenient = true
     }
+
 
     @ExperimentalSerializationApi
     @Singleton

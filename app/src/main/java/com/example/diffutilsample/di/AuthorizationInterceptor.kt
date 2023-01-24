@@ -9,10 +9,12 @@ private const val HASH = "hash"
 
 open class AuthorizationInterceptor : Interceptor {
 
+
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         return proceedRequestWithAuthorization(chain)
     }
+
 
     private fun proceedRequestWithAuthorization(chain: Interceptor.Chain): Response {
         var request = chain.request()

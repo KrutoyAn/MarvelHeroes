@@ -10,9 +10,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.diffutilsample.R
 import com.example.diffutilsample.data.dto.GreatResult
 import com.example.diffutilsample.databinding.ActivityHeroesBinding
 import com.example.diffutilsample.presentation.adapter.HeroesAdapter
+import com.example.diffutilsample.presentation.fragments.FragmentHeroes
 import com.example.diffutilsample.presentation.viewmodel.HeroesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -33,11 +35,11 @@ class HeroesActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 
-
         binding.heroesRecycler.adapter = adapter
 
+
         binding.heroesRecycler.setOnClickListener {
-            // fragmentTransaction.replace(R.id.fragment_hero, FragmentHeroes()).commit()
+            fragmentTransaction.replace(R.id.fragment_hero, FragmentHeroes()).commit()
         }
 
         binding.heroesRecycler.layoutManager = GridLayoutManager(this, 2)

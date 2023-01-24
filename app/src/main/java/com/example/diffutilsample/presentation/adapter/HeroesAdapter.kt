@@ -34,6 +34,7 @@ class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.HeroesViewHolder>() {
         return heroesList.size
     }
 
+
     fun setData(newHeroes: List<HeroModel>) {
         val diffUtil = HeroDiffutil(heroesList, newHeroes)
         val diffResults = DiffUtil.calculateDiff(diffUtil)

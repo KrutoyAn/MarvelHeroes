@@ -9,6 +9,7 @@ import retrofit2.http.Query
 import retrofit2.http.Url
 
 
+
 interface HeroService {
     @GET("v1/public/characters")
     suspend fun getHeroesAsync(
