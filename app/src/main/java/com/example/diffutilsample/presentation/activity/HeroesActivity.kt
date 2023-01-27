@@ -19,7 +19,6 @@ import com.example.diffutilsample.presentation.viewmodel.HeroesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class HeroesActivity : AppCompatActivity() {
 

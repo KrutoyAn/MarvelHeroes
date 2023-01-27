@@ -8,7 +8,6 @@ import com.example.diffutilsample.presentation.model.HeroModel
 import com.example.diffutilsample.presentation.model.ThumbNailModel
 import kotlinx.serialization.SerialName
 
-
 @Entity
 data class HeroEntity(
     @PrimaryKey

@@ -24,7 +24,6 @@ object NetworkModule {
         isLenient = true
     }
 
-
     @ExperimentalSerializationApi
     @Singleton
     @Provides

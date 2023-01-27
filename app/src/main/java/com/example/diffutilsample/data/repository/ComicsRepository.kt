@@ -7,8 +7,6 @@ import com.example.diffutilsample.data.service.HeroService
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
-
 @Singleton
 class ComicsRepository @Inject constructor(
     private val service: HeroService

@@ -18,6 +18,7 @@ class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.HeroesViewHolder>() {
         fun onItemClick(position: Int)
     }
 
+
     fun setOnItemClickListenter(clickListener: onItemClickListener){
         mListener = clickListener
     }

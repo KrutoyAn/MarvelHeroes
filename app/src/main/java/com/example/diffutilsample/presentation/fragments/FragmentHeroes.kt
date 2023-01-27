@@ -11,6 +11,7 @@ import com.example.diffutilsample.R
 class FragmentHeroes : Fragment() {
 
 
+
     companion object {
         fun newInstance() = FragmentHeroes()
     }

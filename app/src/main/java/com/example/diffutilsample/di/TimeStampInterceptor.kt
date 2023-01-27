@@ -14,7 +14,6 @@ open class TimeStampInterceptor : Interceptor {
         return proceedRequestWithTimestamp(chain)
     }
 
-
     private fun proceedRequestWithTimestamp(chain: Interceptor.Chain): Response {
         var request = chain.request()
         val url = request.url.newBuilder()
