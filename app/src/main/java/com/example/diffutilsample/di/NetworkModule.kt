@@ -1,6 +1,5 @@
 package com.example.diffutilsample.di
 
-import com.an9ar.jetheroes.di.TimeStampInterceptor
 import com.example.diffutilsample.interceptors.HeaderInterceptor
 import com.example.diffutilsample.data.service.HeroService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory

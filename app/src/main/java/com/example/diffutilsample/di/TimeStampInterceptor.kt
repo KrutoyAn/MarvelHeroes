@@ -1,4 +1,4 @@
-package com.an9ar.jetheroes.di
+package com.example.diffutilsample.di
 
 import okhttp3.Interceptor
 import okhttp3.Response

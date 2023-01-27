@@ -37,7 +37,6 @@ class HeroesActivity : AppCompatActivity() {
 
         binding.heroesRecycler.adapter = adapter
 
-
         binding.heroesRecycler.setOnClickListener {
             fragmentTransaction.replace(R.id.fragment_hero, FragmentHeroes()).commit()
         }

@@ -12,7 +12,15 @@ import com.example.diffutilsample.presentation.model.getImageUrl
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.HeroesViewHolder>() {
+    private lateinit var mListener: onItemClickListener
 
+    interface onItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListenter(clickListener: onItemClickListener){
+        mListener = clickListener
+    }
 
     var heroesList = emptyList<HeroModel>()
         private set
@@ -21,7 +29,7 @@ class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.HeroesViewHolder>() {
         return HeroesViewHolder(
             HeroItemBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            )
+            ), mListener
         )
     }
 
@@ -42,16 +50,19 @@ class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.HeroesViewHolder>() {
         diffResults.dispatchUpdatesTo(this)
     }
 
-    class HeroesViewHolder(private val binding: HeroItemBinding) :
+    class HeroesViewHolder(private val binding: HeroItemBinding, clickListener: onItemClickListener) :
         RecyclerView.ViewHolder(binding.root) {
-
+        init {
+            itemView.setOnClickListener{
+                clickListener.onItemClick(adapterPosition)
+            }
+        }
         fun bind(item: HeroModel) {
             binding.heroTitle.text = item.name
             Glide.with(binding.heroImage.context)
                 .load(item.thumbnail.getImageUrl())
                 .apply(RequestOptions.bitmapTransform(RoundedCornersTransformation(45, 0)))
                 .into(binding.heroImage)
-
         }
     }
 }
