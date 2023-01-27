@@ -1,6 +1,5 @@
 package com.example.diffutilsample.presentation.activity
 
-import android.R
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -11,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.diffutilsample.R
 import com.example.diffutilsample.data.dto.GreatResult
 import com.example.diffutilsample.databinding.ActivityHeroesBinding
 import com.example.diffutilsample.presentation.adapter.HeroesAdapter
@@ -18,7 +18,6 @@ import com.example.diffutilsample.presentation.fragments.FragmentHeroes
 import com.example.diffutilsample.presentation.viewmodel.HeroesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
 
 @AndroidEntryPoint
 class HeroesActivity : AppCompatActivity() {
@@ -35,19 +34,18 @@ class HeroesActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 
-
         binding.heroesRecycler.adapter = adapter
 
-        binding.heroesRecycler.setOnClickListener{
+        binding.heroesRecycler.setOnClickListener {
             fragmentTransaction.replace(R.id.fragment_hero, FragmentHeroes()).commit()
         }
 
-        binding.heroesRecycler.layoutManager = GridLayoutManager(this,2)
+        binding.heroesRecycler.layoutManager = GridLayoutManager(this, 2)
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 when (val result = viewModel.fetchHeroes()) {
                     is GreatResult.Success -> {
-                        adapter.setData(result.data.pagingInfo.results)
+                        adapter.setData(result.data)
                         binding.redProgress.isGone = true
                     }
                     is GreatResult.Error -> {
