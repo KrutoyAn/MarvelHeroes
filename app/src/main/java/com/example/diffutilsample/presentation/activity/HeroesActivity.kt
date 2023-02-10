@@ -1,9 +1,13 @@
 package com.example.diffutilsample.presentation.activity
 
 import android.os.Bundle
+import android.view.Menu
+import android.widget.PopupMenu
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.text.toLowerCase
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
@@ -15,9 +19,12 @@ import com.example.diffutilsample.data.dto.GreatResult
 import com.example.diffutilsample.databinding.ActivityHeroesBinding
 import com.example.diffutilsample.presentation.adapter.HeroesAdapter
 import com.example.diffutilsample.presentation.fragments.FragmentHeroes
+import com.example.diffutilsample.presentation.model.HeroModel
 import com.example.diffutilsample.presentation.viewmodel.HeroesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class HeroesActivity : AppCompatActivity() {
@@ -26,19 +33,52 @@ class HeroesActivity : AppCompatActivity() {
     private val viewModel by viewModels<HeroesViewModel>()
     private val adapter: HeroesAdapter = HeroesAdapter()
 
+    private lateinit var searchList: List<HeroModel>
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHeroesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-
         binding.heroesRecycler.adapter = adapter
 
-        binding.heroesRecycler.setOnClickListener {
-            fragmentTransaction.replace(R.id.fragment_hero, FragmentHeroes()).commit()
+        adapter.mListener = {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_hero, FragmentHeroes.newInstance(it))
+                .addToBackStack("BackStep")
+                .setReorderingAllowed(true)
+                .commit()
         }
+
+//        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                binding.searchView.clearFocus()
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                searchList.clear()
+//                val searchText = newText!!.toLowerCase(Locale.getDefault())
+//                if (searchText.isNotEmpty()){
+//                    dataList.forEach{
+//                        if (it.name.lowercase(Locale.getDefault()).contains(searchText)) {
+//                            searchList.add(it)
+//                        }
+//                    }
+//                    binding.heroesRecycler.adapter!!.notifyDataSetChanged()
+//                } else {
+//                    searchList.clear()
+//                    searchList.addAll(dataList)
+//                    binding.heroesRecycler.adapter!!.notifyDataSetChanged()
+//                }
+//                return false
+//            }
+//
+//        })
+
+
 
         binding.heroesRecycler.layoutManager = GridLayoutManager(this, 2)
         lifecycleScope.launch {
@@ -47,6 +87,9 @@ class HeroesActivity : AppCompatActivity() {
                     is GreatResult.Success -> {
                         adapter.setData(result.data)
                         binding.redProgress.isGone = true
+                    }
+                    is GreatResult.Progress -> {
+
                     }
                     is GreatResult.Error -> {
                         binding.redProgress.isGone = true
@@ -61,7 +104,6 @@ class HeroesActivity : AppCompatActivity() {
             }
         }
     }
-
 }
 
 
