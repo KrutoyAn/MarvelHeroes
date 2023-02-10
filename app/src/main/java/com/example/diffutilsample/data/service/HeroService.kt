@@ -14,4 +14,7 @@ interface HeroService {
         @Query("limit") limit: Int = 20,
         @Query("offset") offset: Int = 0,
     ): HeroResponseDto
+
+    @GET("v1/public/characters/{characterId}")
+    suspend fun getHeroInfo(@Path("characterId") heroId: Long): HeroInfoResponse
 }

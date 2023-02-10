@@ -14,7 +14,6 @@
         <item name="android:windowContentTransitions" tools:ignore="NewApi">true</item>
     </style>
 
-
     <style name="AppTheme.ButtonStyle" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">18sp</item>
@@ -35,10 +34,4 @@
         <item name="android:padding">0dp</item>
         <item name="android:background">@drawable/round_button_red</item>
     </style>
-
-    <!--load background
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/marvel</item>
-    </style>
--->
 </resources>

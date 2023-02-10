@@ -5,22 +5,38 @@
     android:layout_height="match_parent"
     tools:context=".presentation.activity.HeroesActivity">
 
-
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:background="@drawable/marvel"/>
+        android:src="@drawable/marvel" />
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Enter name Hero"
+        android:background="@drawable/searchview_background"
+        android:queryBackground="@android:color/transparent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/heroes_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"/>
 
     <ProgressBar
         android:id="@+id/redProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_hero"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 
 </FrameLayout>

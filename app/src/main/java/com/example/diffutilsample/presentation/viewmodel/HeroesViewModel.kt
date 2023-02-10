@@ -3,10 +3,10 @@ package com.example.diffutilsample.presentation.viewmodel
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import com.example.diffutilsample.data.dto.GreatResult
+import com.example.diffutilsample.data.dto.heroinfo.HeroInfoDto
 import com.example.diffutilsample.data.repository.HeroRepository
 import com.example.diffutilsample.presentation.model.HeroModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel

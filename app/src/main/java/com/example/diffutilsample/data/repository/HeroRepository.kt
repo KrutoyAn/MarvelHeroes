@@ -1,6 +1,7 @@
 package com.example.diffutilsample.data.repository
 
 import com.example.diffutilsample.data.dto.GreatResult
+import com.example.diffutilsample.data.dto.heroinfo.HeroInfoDto
 import com.example.diffutilsample.data.dto.heroinfo.mapToEntity
 import com.example.diffutilsample.data.dto.heroinfo.mapToModel
 import com.example.diffutilsample.data.service.HeroService
@@ -13,7 +14,8 @@ import javax.inject.Singleton
 
 @Singleton
 class HeroRepository @Inject constructor(
-    private val heroService: HeroService, private val heroesDao: HeroesDao
+    private val heroService: HeroService,
+    private val heroesDao: HeroesDao
 ) {
     suspend fun loadHeroes(): GreatResult<List<HeroModel>> {
         return withContext(Dispatchers.IO) {
@@ -31,5 +33,11 @@ class HeroRepository @Inject constructor(
                 }
             }
         }
+    }
+
+    suspend fun loadHeroInfoById(heroId: Long): GreatResult<HeroInfoDto> {
+        return GreatResult.Success(
+            heroService.getHeroInfo(heroId = heroId).info.results.first()
+        )
     }
 }
