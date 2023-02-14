@@ -15,6 +15,8 @@ class HeroesViewModel
     private var heroRepository: HeroRepository
 ) : ViewModel(), LifecycleObserver {
 
+    var heroesList = mutableListOf<HeroModel>()
+
     suspend fun fetchHeroes(): GreatResult<List<HeroModel>> {
         return heroRepository.loadHeroes()
     }
