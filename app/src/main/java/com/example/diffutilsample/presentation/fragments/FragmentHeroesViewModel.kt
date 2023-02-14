@@ -19,5 +19,6 @@ class FragmentHeroesViewModel
         } catch (exception: Exception) {
             GreatResult.Error(exception)
         }
+
     }
 }
