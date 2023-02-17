@@ -40,8 +40,6 @@ class ComicsAdapter() : PagingDataAdapter<HeroModel, ComicsAdapter.HeroesViewHol
     ) : RecyclerView.ViewHolder(binding.root) {
 
     }
-
-
 //    companion object {
 //
 //        val differCallback = object : DiffUtil.ItemCallback<HeroResponse>() {

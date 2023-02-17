@@ -23,6 +23,7 @@ class HeroFragmentAdapter() : RecyclerView.Adapter<HeroFragmentAdapter.HeroFragm
     var heroesList = emptyList<HeroModel>()
         private set
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroFragmentViewHolder {
         return HeroFragmentAdapter.HeroFragmentViewHolder(
             HeroItemBinding.inflate(

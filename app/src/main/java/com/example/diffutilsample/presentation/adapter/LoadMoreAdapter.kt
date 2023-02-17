@@ -18,6 +18,7 @@ class LoadMoreAdapter(private val retry: () -> Unit) : LoadStateAdapter<LoadMore
         return ViewHolder(retry)
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, loadState: LoadState) {
         holder.setData(loadState)
     }

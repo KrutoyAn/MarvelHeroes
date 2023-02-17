@@ -17,6 +17,7 @@
         <entry key="..\:/Android_Projects/RecycleView/app/src/main/res/layout/activity_main.xml" value="0.1468227424749164" />
         <entry key="..\:/Android_Projects/RecycleView/app/src/main/res/layout/row_item.xml" value="0.264" />
         <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/drawable/circle.xml" value="0.1" />
+        <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/drawable/ic_baseline_autorenew_24.xml" value="0.1025" />
         <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.104" />
         <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/drawable/ic_baseline_img.xml" value="0.1" />
         <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/drawable/load_more.xml" value="0.1" />
@@ -25,11 +26,11 @@
         <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/drawable/searchview_background.xml" value="0.1275" />
         <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/activity_heroes.xml" value="0.1" />
         <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/fragment_hero.xml" value="0.15087719298245614" />
+        <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/fragment_hero.xml" value="0.1" />
         <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/fragment_item.xml" value="0.23854166666666668" />
         <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/fragment_item_list.xml" value="0.264" />
         <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/hero_item.xml" value="0.1" />
-        <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/load_more.xml" value="0.264" />
+        <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/load_more.xml" value="0.1" />
         <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/recycler_view_item.xml" value="0.1" />
         <entry key="..\:/Android_Projects/RecycleView23/app/src/main/res/layout/row_item.xml" value="0.21851851851851853" />
       </map>

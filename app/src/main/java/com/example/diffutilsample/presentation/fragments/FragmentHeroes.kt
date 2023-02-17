@@ -41,6 +41,7 @@ class FragmentHeroes : Fragment() {
         }
     }
 
+
     private lateinit var binding: FragmentHeroBinding
     private val viewModel: FragmentHeroesViewModel by viewModels()
     private val adapter: HeroFragmentAdapter = HeroFragmentAdapter()

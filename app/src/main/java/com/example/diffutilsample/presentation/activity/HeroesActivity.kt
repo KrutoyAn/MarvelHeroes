@@ -109,6 +109,7 @@ class HeroesActivity : AppCompatActivity() {
                  }*/
             }
         }
+
         lifecycleScope.launchWhenCreated {
             adapter.loadStateFlow.collect {
                 val state = it.refresh
