@@ -13,7 +13,6 @@ class ComicsDiffUtil(
         return oldList.size
     }
 
-
     override fun getNewListSize(): Int {
         return newList.size
     }

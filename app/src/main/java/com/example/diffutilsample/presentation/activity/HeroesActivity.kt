@@ -87,26 +87,6 @@ class HeroesActivity : AppCompatActivity() {
                     adapter.submitData(pagingData.map { it.mapToEntity().mapToModel() })
 
                 }
-
-                /* when (val result = viewModel.fetchHeroes()) {
-                     is GreatResult.Success -> {
-                         viewModel.heroesList = result.data.toMutableList()
-                         adapter.setData(result.data)
-                         binding.redProgress.isGone = true
-                     }
-                     is GreatResult.Progress -> {
-
-                     }
-                     is GreatResult.Error -> {
-                         binding.redProgress.isGone = true
-                         Toast.makeText(
-                             this@HeroesActivity,
-                             "error",
-                             Toast.LENGTH_LONG
-                         ).show()
-                     }
-                     GreatResult.Progress -> binding.redProgress.isVisible = true
-                 }*/
             }
         }
 

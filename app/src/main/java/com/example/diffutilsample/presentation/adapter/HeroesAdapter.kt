@@ -30,7 +30,6 @@ class HeroesAdapter() : PagingDataAdapter<HeroModel, HeroesAdapter.HeroesViewHol
         )
     }
 
-
     override fun onBindViewHolder(holder: HeroesViewHolder, position: Int) {
         val item = getItem(position)!!
         holder.bind(item, mListener)

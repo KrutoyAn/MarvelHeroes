@@ -40,16 +40,4 @@ class ComicsAdapter() : PagingDataAdapter<HeroModel, ComicsAdapter.HeroesViewHol
     ) : RecyclerView.ViewHolder(binding.root) {
 
     }
-//    companion object {
-//
-//        val differCallback = object : DiffUtil.ItemCallback<HeroResponse>() {
-//            override fun areItemsTheSame(oldItem: HeroResponse, newItem: HeroResponse): Boolean {
-//                return oldItem.id == oldItem.id
-//            }
-//
-//            override fun areContentsTheSame(oldItem: HeroResponse, newItem: HeroResponse): Boolean {
-//                return oldItem == newItem
-//            }
-//        }
-//    }
 }

@@ -15,6 +15,7 @@ import javax.inject.Singleton
 class HeroRepository @Inject constructor(
     private val heroService: HeroService,
     private val heroesDao: HeroesDao
+
 ) {
     suspend fun loadHeroes(limit: Int, offset: Int): HeroResponseDto {
         return withContext(Dispatchers.IO) {

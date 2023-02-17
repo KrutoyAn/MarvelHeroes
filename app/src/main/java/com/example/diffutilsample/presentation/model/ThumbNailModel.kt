@@ -5,7 +5,6 @@ data class ThumbNailModel(
     val path: String,
 )
 
-
 fun ThumbNailModel.getImageUrl(): String {
     return "${this.path}.${this.extension}"
 }
