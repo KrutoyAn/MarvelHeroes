@@ -23,6 +23,7 @@ class HeroFragmentAdapter() : RecyclerView.Adapter<HeroFragmentAdapter.HeroFragm
     var heroesList = emptyList<HeroModel>()
         private set
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroFragmentViewHolder {
         return HeroFragmentAdapter.HeroFragmentViewHolder(
             HeroItemBinding.inflate(
@@ -41,7 +42,7 @@ class HeroFragmentAdapter() : RecyclerView.Adapter<HeroFragmentAdapter.HeroFragm
     }
 
     fun setData(newHeroes: List<HeroModel>) {
-        val diffUtil = HeroDiffutil(heroesList, newHeroes)
+        val diffUtil = ComicsDiffUtil(heroesList, newHeroes)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
         heroesList = newHeroes
         diffResults.dispatchUpdatesTo(this)

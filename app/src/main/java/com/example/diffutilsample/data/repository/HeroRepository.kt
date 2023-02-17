@@ -1,11 +1,10 @@
 package com.example.diffutilsample.data.repository
 
 import com.example.diffutilsample.data.dto.GreatResult
+import com.example.diffutilsample.data.dto.comicsinfo.ComicsWrapperDto
 import com.example.diffutilsample.data.dto.heroinfo.HeroInfoDto
-import com.example.diffutilsample.data.dto.heroinfo.mapToEntity
-import com.example.diffutilsample.data.dto.heroinfo.mapToModel
+import com.example.diffutilsample.data.dto.heroinfo.HeroResponseDto
 import com.example.diffutilsample.data.service.HeroService
-import com.example.diffutilsample.presentation.model.HeroModel
 import com.example.diffutilsample.room.HeroesDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -17,21 +16,9 @@ class HeroRepository @Inject constructor(
     private val heroService: HeroService,
     private val heroesDao: HeroesDao
 ) {
-    suspend fun loadHeroes(): GreatResult<List<HeroModel>> {
+    suspend fun loadHeroes(limit: Int, offset: Int): HeroResponseDto {
         return withContext(Dispatchers.IO) {
-            try {
-                val heroes =
-                    heroService.getHeroesAsync().pagingInfo.results.map { it.mapToEntity() }
-                heroesDao.insert(heroes)
-                GreatResult.Success(heroes.map { it.mapToModel() })
-            } catch (e: Exception) {
-                val heroes = heroesDao.getAll()
-                if (heroes.isEmpty()) {
-                    GreatResult.Error(e)
-                } else {
-                    GreatResult.Success(heroes.map { it.mapToModel() })
-                }
-            }
+            heroService.getHeroesAsync(limit, offset)
         }
     }
 
@@ -39,5 +26,9 @@ class HeroRepository @Inject constructor(
         return GreatResult.Success(
             heroService.getHeroInfo(heroId = heroId).info.results.first()
         )
+    }
+
+    suspend fun loadComicsById(id: String): GreatResult<ComicsWrapperDto> {
+        return GreatResult.Success(heroService.getComicsInfoById(id).info)
     }
 }

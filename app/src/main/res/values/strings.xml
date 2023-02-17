@@ -5,4 +5,5 @@
     <string name="blocked">Block</string>
     <string name="word">Word123123123123123</string>
     <string name="start">START</string>
+    <string name="errorRetry">Ooops, somthings woring</string>
 </resources>

@@ -16,6 +16,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
+
     @Provides
     fun provideChannelDao(appDatabase: AppDatabase): HeroesDao {
         return appDatabase.heroesDao()

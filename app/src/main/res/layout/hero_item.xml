@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="190dp"
