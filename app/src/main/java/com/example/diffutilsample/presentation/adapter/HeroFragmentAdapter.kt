@@ -41,7 +41,7 @@ class HeroFragmentAdapter() : RecyclerView.Adapter<HeroFragmentAdapter.HeroFragm
     }
 
     fun setData(newHeroes: List<HeroModel>) {
-        val diffUtil = HeroDiffutil(heroesList, newHeroes)
+        val diffUtil = ComicsDiffUtil(heroesList, newHeroes)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
         heroesList = newHeroes
         diffResults.dispatchUpdatesTo(this)

@@ -17,4 +17,7 @@ interface HeroService {
 
     @GET("v1/public/characters/{characterId}")
     suspend fun getHeroInfo(@Path("characterId") heroId: Long): HeroInfoResponse
+
+    @GET("v1/public/characters/{comicsId}/comics")
+    suspend fun getComicsInfoById(@Path("comicsId") comicsId: String): ComicsWrapperResponse
 }

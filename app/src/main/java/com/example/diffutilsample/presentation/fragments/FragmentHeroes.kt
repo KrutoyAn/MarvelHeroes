@@ -5,25 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import com.example.diffutilsample.R
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.diffutilsample.data.dto.GreatResult
 import com.example.diffutilsample.data.dto.getImageUrl
 import com.example.diffutilsample.databinding.FragmentHeroBinding
-import com.example.diffutilsample.databinding.HeroItemBinding
 import com.example.diffutilsample.presentation.adapter.HeroFragmentAdapter
-import com.example.diffutilsample.presentation.adapter.HeroesAdapter
+import com.example.diffutilsample.presentation.model.HeroModel
+import com.example.diffutilsample.presentation.model.ThumbNailModel
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import kotlinx.coroutines.launch
@@ -42,19 +40,18 @@ class FragmentHeroes : Fragment() {
             }
         }
     }
-    private val adapter: HeroFragmentAdapter = HeroFragmentAdapter()
+
     private lateinit var binding: FragmentHeroBinding
     private val viewModel: FragmentHeroesViewModel by viewModels()
+    private val adapter: HeroFragmentAdapter = HeroFragmentAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding.fragmentRecycler.adapter = adapter
         binding = FragmentHeroBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -95,18 +92,39 @@ class FragmentHeroes : Fragment() {
                             binding.textViewName.text = result.data.name
                             binding.textView.text = result.data.description
                         }
+                        loadComicsDto(
+                            result.data.comicsDto.collectionUri.toUri().path?.split (
+                                    "/"
+                                    )?.get(4).orEmpty()
+                        )
                     }
-                    GreatResult.Progress -> binding.redProgressFragment.isVisible = true
+                    GreatResult.Progress -> {
+                        binding.redProgressFragment.isVisible = true
+                    }
                 }
             }
         }
 
         binding.fragmentRecycler.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.fragmentRecycler.adapter = adapter
+    }
+
+    private fun loadComicsDto(comicsId: String) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                when (val result = viewModel.fetchHeroInfo(arguments?.getLong(HERO_ID) ?: error("Error"))) {
+                when (val result =
+                    viewModel.fetchComicsInfoById(comicsId)) {
                     is GreatResult.Success -> {
-                        //adapter.setData(result.data)
+                        adapter.setData(result.data.results.map {
+                            HeroModel(
+                                id = it.id.toLong(),
+                                name = it.description.orEmpty(),
+                                thumbnail = ThumbNailModel(
+                                    it.thumbnail.extension,
+                                    it.thumbnail.path
+                                )
+                            )
+                        })
                         binding.redProgressFragment.isGone = true
                     }
                     is GreatResult.Progress -> {

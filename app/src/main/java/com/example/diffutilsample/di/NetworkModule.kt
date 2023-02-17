@@ -19,6 +19,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+
     private val json = Json {
         ignoreUnknownKeys = true
         isLenient = true

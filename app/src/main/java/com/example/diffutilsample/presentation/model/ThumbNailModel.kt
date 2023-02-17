@@ -1,7 +1,5 @@
 package com.example.diffutilsample.presentation.model
 
-
-
 data class ThumbNailModel(
     val extension: String,
     val path: String,

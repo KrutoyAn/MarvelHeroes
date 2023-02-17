@@ -11,6 +11,7 @@ data class ThumbNailEntity(
     val path: String,
 )
 
+
 fun ThumbNailEntity.getImageUrl(): String {
     return "${this.path}.${this.extension}"
 }
