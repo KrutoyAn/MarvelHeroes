@@ -9,6 +9,7 @@ object HeroDiffutil : DiffUtil.ItemCallback<HeroModel>() {
         return oldItem.id == newItem.id
     }
 
+
     override fun areContentsTheSame(oldItem: HeroModel, newItem: HeroModel): Boolean {
         return oldItem == newItem
     }

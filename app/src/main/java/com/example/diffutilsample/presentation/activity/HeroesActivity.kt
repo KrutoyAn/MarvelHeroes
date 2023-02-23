@@ -1,15 +1,9 @@
 package com.example.diffutilsample.presentation.activity
 
 import android.os.Bundle
-import android.os.Process
-import android.view.View
-import android.widget.ProgressBar
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.runtime.isTraceInProgress
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -21,7 +15,6 @@ import com.example.diffutilsample.R
 import com.example.diffutilsample.data.dto.heroinfo.mapToEntity
 import com.example.diffutilsample.data.dto.heroinfo.mapToModel
 import com.example.diffutilsample.databinding.ActivityHeroesBinding
-import com.example.diffutilsample.presentation.adapter.ComicsAdapter
 import com.example.diffutilsample.presentation.adapter.HeroesAdapter
 import com.example.diffutilsample.presentation.adapter.LoadMoreAdapter
 import com.example.diffutilsample.presentation.fragments.FragmentHeroes
@@ -70,7 +63,9 @@ class HeroesActivity : AppCompatActivity() {
                             searchList.add(it)
                         }
                     }
+
                 } else {
+
                     binding.heroesRecycler.smoothScrollToPosition(0)
                 }
                 return false
@@ -96,6 +91,7 @@ class HeroesActivity : AppCompatActivity() {
                 binding.redProgress.isVisible = state is LoadState.Loading
             }
         }
+
         binding.heroesRecycler.adapter = adapter.withLoadStateFooter(
             LoadMoreAdapter{
                 adapter.retry()
@@ -103,5 +99,6 @@ class HeroesActivity : AppCompatActivity() {
         )
     }
 }
+
 
 

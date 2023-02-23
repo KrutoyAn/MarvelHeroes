@@ -2,11 +2,12 @@ package com.example.diffutilsample.presentation.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.diffutilsample.presentation.model.HeroModel
+import com.example.diffutilsample.presentation.model.СomicsModel
 
 
 class ComicsDiffUtil(
-    private val oldList: List<HeroModel>,
-    private val newList: List<HeroModel>
+    private val oldList: List<СomicsModel>,
+    private val newList: List<СomicsModel>
 ) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {

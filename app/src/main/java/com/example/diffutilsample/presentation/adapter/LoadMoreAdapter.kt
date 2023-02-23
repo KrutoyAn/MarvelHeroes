@@ -10,7 +10,6 @@ import com.example.diffutilsample.databinding.LoadMoreBinding
 
 class LoadMoreAdapter(private val retry: () -> Unit) : LoadStateAdapter<LoadMoreAdapter.ViewHolder>() {
 
-
     private lateinit var binding: LoadMoreBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): ViewHolder {
@@ -26,6 +25,7 @@ class LoadMoreAdapter(private val retry: () -> Unit) : LoadStateAdapter<LoadMore
         init {
             binding.btnRetry.setOnClickListener{ retry() }
         }
+
         fun setData(states: LoadState){
             binding.apply {
                 redProgressMore.isVisible = states is LoadState.Loading
