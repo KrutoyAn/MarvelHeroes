@@ -12,7 +12,6 @@ data class ThumbNailDto(
     val path: String,
 )
 
-
 fun ThumbNailDto.getImageUrl(): String {
     return "${this.path}.${this.extension}"
 }

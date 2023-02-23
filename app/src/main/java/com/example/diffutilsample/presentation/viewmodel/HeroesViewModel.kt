@@ -23,7 +23,6 @@ class HeroesViewModel
     private var heroRepository: HeroRepository
 ) : ViewModel(), LifecycleObserver {
 
-
     val heroes: Flow<PagingData<HeroResponse>> = Pager(
         PagingConfig(pageSize = 20)
     ) {

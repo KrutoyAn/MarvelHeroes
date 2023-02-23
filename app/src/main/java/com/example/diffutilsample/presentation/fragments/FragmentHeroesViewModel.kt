@@ -22,7 +22,6 @@ class FragmentHeroesViewModel
         }
     }
 
-
     suspend fun fetchComicsInfoById(id: String): GreatResult<ComicsWrapperDto> {
         return try {
             heroRepository.loadComicsById(id)

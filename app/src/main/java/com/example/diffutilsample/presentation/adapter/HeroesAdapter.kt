@@ -7,6 +7,7 @@ import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
 import android.view.animation.AnticipateOvershootInterpolator
 import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -29,7 +30,6 @@ class HeroesAdapter() : PagingDataAdapter<HeroModel, HeroesAdapter.HeroesViewHol
             )
         )
     }
-
 
     override fun onBindViewHolder(holder: HeroesViewHolder, position: Int) {
         val item = getItem(position)!!

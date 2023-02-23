@@ -19,6 +19,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.diffutilsample.data.dto.GreatResult
 import com.example.diffutilsample.data.dto.getImageUrl
 import com.example.diffutilsample.databinding.FragmentHeroBinding
+import com.example.diffutilsample.presentation.adapter.ComicsAdapter
 import com.example.diffutilsample.presentation.adapter.HeroFragmentAdapter
 import com.example.diffutilsample.presentation.model.HeroModel
 import com.example.diffutilsample.presentation.model.ThumbNailModel
@@ -41,10 +42,10 @@ class FragmentHeroes : Fragment() {
         }
     }
 
-
     private lateinit var binding: FragmentHeroBinding
     private val viewModel: FragmentHeroesViewModel by viewModels()
     private val adapter: HeroFragmentAdapter = HeroFragmentAdapter()
+    private val adapterComicsAdapter: ComicsAdapter = ComicsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,23 +55,21 @@ class FragmentHeroes : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 when (val result =
                     viewModel.fetchHeroInfo(arguments?.getLong(HERO_ID) ?: error("Error"))) {
+
                     is GreatResult.Error -> {
                         binding.redProgressFragment.isGone = true
-                        binding.textView.text = "Нет соединения"
+                        binding.textViewContent.text = "Нет соединения"
                         Toast.makeText(
                             context,
                             "error",
                             Toast.LENGTH_LONG
                         ).show()
-                    }
-
-                    is GreatResult.Progress -> {
-
                     }
 
                     is GreatResult.Success -> {
@@ -88,11 +87,12 @@ class FragmentHeroes : Fragment() {
                             .into(binding.imageView)
                         if (result.data.description.isEmpty()) {
                             binding.textViewName.text = result.data.name
-                            binding.textView.text = "Комикс находится на стадии редактирования"
+                            binding.textViewContent.text = "Комикс находится на стадии редактирования"
                         } else {
                             binding.textViewName.text = result.data.name
-                            binding.textView.text = result.data.description
+                            binding.textViewContent.text = result.data.description
                         }
+
                         loadComicsDto(
                             result.data.comicsDto.collectionUri.toUri().path?.split (
                                     "/"
@@ -107,7 +107,7 @@ class FragmentHeroes : Fragment() {
         }
 
         binding.fragmentRecycler.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.fragmentRecycler.adapter = adapter
+        binding.fragmentRecycler.adapter = adapterComicsAdapter
     }
 
     private fun loadComicsDto(comicsId: String) {
@@ -116,20 +116,21 @@ class FragmentHeroes : Fragment() {
                 when (val result =
                     viewModel.fetchComicsInfoById(comicsId)) {
                     is GreatResult.Success -> {
-                        adapter.setData(result.data.results.map {
-                            HeroModel(
-                                id = it.id.toLong(),
-                                name = it.description.orEmpty(),
-                                thumbnail = ThumbNailModel(
-                                    it.thumbnail.extension,
-                                    it.thumbnail.path
-                                )
-                            )
-                        })
-                        binding.redProgressFragment.isGone = true
+                        //adapter.setData(result.data.results)
+                        binding.fragmentRecycler.adapter = adapter
+//                        {
+//                            HeroModel(
+//                                id = it.id.toLong(),
+//                                name = it.description.orEmpty(),
+//                             thumbnail = ThumbNailModel(
+//                                    it.thumbnail.extension,
+//                                    it.thumbnail.path
+//                                )
+//                            )
+//                        })
                     }
                     is GreatResult.Progress -> {
-
+                        binding.redProgressFragment.isGone = true
                     }
                     is GreatResult.Error -> {
                         binding.redProgressFragment.isGone = true
