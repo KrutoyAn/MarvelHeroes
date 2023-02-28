@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
+
 @HiltViewModel
 class HeroesViewModel
 @Inject constructor(

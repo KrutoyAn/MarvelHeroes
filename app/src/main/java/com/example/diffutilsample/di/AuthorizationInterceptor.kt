@@ -4,6 +4,7 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
 
+
 private const val AUTHORIZATION_HEADER = "apikey"
 private const val HASH = "hash"
 

@@ -1,5 +1,6 @@
 package com.example.diffutilsample.presentation.adapter
 
+import HeroDiffutil
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,6 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class HeroFragmentAdapter() : RecyclerView.Adapter<HeroFragmentAdapter.HeroFragmentViewHolder>() {
 
-    var mListener: Listener = {}
     var heroesList = emptyList<HeroModel>()
         private set
 
@@ -31,50 +31,23 @@ class HeroFragmentAdapter() : RecyclerView.Adapter<HeroFragmentAdapter.HeroFragm
 
     override fun onBindViewHolder(holder: HeroFragmentViewHolder, position: Int) {
         val item = heroesList[position]
-        holder.bind(item, mListener)
+        holder.bind(item)
     }
 
     override fun getItemCount(): Int {
         return heroesList.size
     }
 
-    fun setData(newHeroes: List<HeroModel>) {
-        val diffUtil = HeroDiffutil(heroesList, newHeroes)
-        val diffResults = DiffUtil.calculateDiff(diffUtil)
-        heroesList = newHeroes
-        diffResults.dispatchUpdatesTo(this)
-
-    }
-
     class HeroFragmentViewHolder(
         private val binding: HeroItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: HeroModel, clickListener: Listener) {
-//            val anim =
-//                AnimationUtils.loadAnimation(binding.cardView.context, R.anim.error_fade_out,).apply {
-//                    interpolator = AnticipateInterpolator()
-//                    setAnimationListener(object : Animation.AnimationListener {
-//                        override fun onAnimationStart(animation: Animation?) {
-//                        }
-//
-//                        override fun onAnimationEnd(animation: Animation?) {
-//                            clickListener.invoke(item.id)
-//                        }
-//
-//                        override fun onAnimationRepeat(animation: Animation?) {
-//                        }
-//
-//                    })
-//                }
-            binding.cardView.setOnClickListener { clickListener.invoke(item.id) }
+        fun bind(item: HeroModel) {
+
             binding.heroTitle.text = item.name
             Glide.with(binding.heroImage.context).load(item.thumbnail.getImageUrl())
                 .apply(RequestOptions.bitmapTransform(RoundedCornersTransformation(45, 0)))
                 .into(binding.heroImage)
 
-//            binding.cardView.setOnClickListener {
-//                binding.cardView.startAnimation(anim)
-//            }
         }
     }
 }

@@ -8,4 +8,5 @@ import kotlinx.serialization.Serializable
 data class ComicsDto(
     @SerialName("collectionURI")
     val collectionUri: String
+
 )

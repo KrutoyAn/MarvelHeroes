@@ -1,17 +1,19 @@
 package com.example.diffutilsample.presentation.activity
 
 import android.os.Bundle
-import android.widget.SearchView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.paging.map
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.diffutilsample.R
+import com.example.diffutilsample.data.dto.GreatResult
 import com.example.diffutilsample.data.dto.heroinfo.mapToEntity
 import com.example.diffutilsample.data.dto.heroinfo.mapToModel
 import com.example.diffutilsample.databinding.ActivityHeroesBinding
@@ -48,6 +50,7 @@ class HeroesActivity : AppCompatActivity() {
                 .commit()
         }
 
+
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 binding.searchView.clearFocus()
@@ -63,10 +66,14 @@ class HeroesActivity : AppCompatActivity() {
                             searchList.add(it)
                         }
                     }
-
+                    lifecycleScope.launch {
+                        adapter.submitData(PagingData.from(searchList.toMutableList()))
+                    }
                 } else {
-
-                    binding.heroesRecycler.smoothScrollToPosition(0)
+                    lifecycleScope.launch {
+                        adapter.submitData(PagingData.from(viewModel.heroesList.toMutableList()))
+                        binding.heroesRecycler.smoothScrollToPosition(0)
+                    }
                 }
                 return false
             }
@@ -78,10 +85,16 @@ class HeroesActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
 
                 viewModel.heroes.collectLatest { pagingData ->
-
-                    adapter.submitData(pagingData.map { it.mapToEntity().mapToModel() })
+                    adapter.submitData(pagingData
+                        .map {
+                            val k = it.mapToEntity().mapToModel()
+                            viewModel.heroesList.add(k)
+                            k
+                        })
+                    viewModel.heroesList.map { }
 
                 }
+
             }
         }
 
@@ -93,7 +106,7 @@ class HeroesActivity : AppCompatActivity() {
         }
 
         binding.heroesRecycler.adapter = adapter.withLoadStateFooter(
-            LoadMoreAdapter{
+            LoadMoreAdapter {
                 adapter.retry()
             }
         )

@@ -4,6 +4,7 @@ import com.example.diffutilsample.data.dto.heroinfo.HeroResponse
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
 data class MarvelPagingDto(
     @SerialName("limit")

@@ -14,6 +14,7 @@ class FragmentHeroesViewModel
     private val heroRepository: HeroRepository
 ) : ViewModel() {
 
+
     suspend fun fetchHeroInfo(heroId: Long): GreatResult<HeroInfoDto> {
         return try {
             heroRepository.loadHeroInfoById(heroId)

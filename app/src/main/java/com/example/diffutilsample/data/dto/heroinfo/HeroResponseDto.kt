@@ -4,7 +4,6 @@ import com.example.diffutilsample.data.dto.MarvelPagingDto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
 data class HeroResponseDto(
     @SerialName("copyright")

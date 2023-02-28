@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.diffutilsample.data.dto.GreatResult
+import com.example.diffutilsample.data.dto.comicsinfo.mapToModel
 import com.example.diffutilsample.data.dto.getImageUrl
 import com.example.diffutilsample.databinding.FragmentHeroBinding
 import com.example.diffutilsample.presentation.adapter.ComicsAdapter
@@ -44,7 +45,6 @@ class FragmentHeroes : Fragment() {
 
     private lateinit var binding: FragmentHeroBinding
     private val viewModel: FragmentHeroesViewModel by viewModels()
-    private val adapter: HeroFragmentAdapter = HeroFragmentAdapter()
     private val adapterComicsAdapter: ComicsAdapter = ComicsAdapter()
 
     override fun onCreateView(
@@ -55,22 +55,11 @@ class FragmentHeroes : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 when (val result =
                     viewModel.fetchHeroInfo(arguments?.getLong(HERO_ID) ?: error("Error"))) {
-
-                    is GreatResult.Error -> {
-                        binding.redProgressFragment.isGone = true
-                        binding.textViewContent.text = "Нет соединения"
-                        Toast.makeText(
-                            context,
-                            "error",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
 
                     is GreatResult.Success -> {
                         binding.redProgressFragment.isGone = true
@@ -87,20 +76,31 @@ class FragmentHeroes : Fragment() {
                             .into(binding.imageView)
                         if (result.data.description.isEmpty()) {
                             binding.textViewName.text = result.data.name
-                            binding.textViewContent.text = "Комикс находится на стадии редактирования"
+                            binding.textViewContent.text =
+                                "Description of the hero on editing"
                         } else {
                             binding.textViewName.text = result.data.name
                             binding.textViewContent.text = result.data.description
                         }
 
                         loadComicsDto(
-                            result.data.comicsDto.collectionUri.toUri().path?.split (
-                                    "/"
-                                    )?.get(4).orEmpty()
+                            result.data.comicsDto.collectionUri.toUri().path?.split(
+                                "/"
+                            )?.get(4).orEmpty()
                         )
                     }
                     GreatResult.Progress -> {
-                        binding.redProgressFragment.isVisible = true
+
+                    }
+
+                    is GreatResult.Error -> {
+                        binding.redProgressFragment.isGone = true
+                        binding.textViewContent.text = "No connection"
+                        Toast.makeText(
+                            context,
+                            "error",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             }
@@ -116,25 +116,22 @@ class FragmentHeroes : Fragment() {
                 when (val result =
                     viewModel.fetchComicsInfoById(comicsId)) {
                     is GreatResult.Success -> {
-                        //adapter.setData(result.data.results)
-                        binding.fragmentRecycler.adapter = adapter
-//                        {
-//                            HeroModel(
-//                                id = it.id.toLong(),
-//                                name = it.description.orEmpty(),
-//                             thumbnail = ThumbNailModel(
-//                                    it.thumbnail.extension,
-//                                    it.thumbnail.path
-//                                )
-//                            )
-//                        })
+                        binding.redProgressFragmentRecycle.isGone = true
+                        binding.fragmentRecycler.adapter = adapterComicsAdapter
+                        adapterComicsAdapter.setData(result.data.results.map { it.mapToModel() })
                     }
+
                     is GreatResult.Progress -> {
-                        binding.redProgressFragment.isGone = true
+
                     }
+
                     is GreatResult.Error -> {
                         binding.redProgressFragment.isGone = true
-
+                        Toast.makeText(
+                            context,
+                            "error",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                     GreatResult.Progress -> binding.redProgressFragment.isVisible = true
                 }

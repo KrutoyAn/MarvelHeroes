@@ -1,6 +1,5 @@
 package com.example.diffutilsample.data.source
 
-import android.widget.ProgressBar
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.diffutilsample.data.dto.heroinfo.HeroResponse
@@ -16,6 +15,7 @@ class HeroDataSource constructor(
         return try {
             val offset = params.key ?: 0
             val movieListResponse = repository.loadHeroes(limit = 20, offset = offset)
+
             LoadResult.Page(
                 data = movieListResponse.pagingInfo.results,
                 prevKey = if (offset == 0) null else offset - 20,
@@ -23,8 +23,6 @@ class HeroDataSource constructor(
             )
         } catch (e: Exception) {
             LoadResult.Error(e)
-        }catch (httpE:HttpException){
-            LoadResult.Error(httpE)
         }
     }
 

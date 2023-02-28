@@ -5,25 +5,21 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.AnticipateInterpolator
-import android.view.animation.AnticipateOvershootInterpolator
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.diffutilsample.R
 import com.example.diffutilsample.databinding.HeroItemBinding
-import com.example.diffutilsample.presentation.adapter.ComicsAdapter.ComicsViewHolder
-import com.example.diffutilsample.presentation.model.HeroModel
 import com.example.diffutilsample.presentation.model.getImageUrl
 import com.example.diffutilsample.presentation.model.СomicsModel
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 
 class ComicsAdapter() : RecyclerView.Adapter<ComicsAdapter.ComicsViewHolder>() {
-
     var mListener: Listener = {}
     var heroesList = emptyList<СomicsModel>()
+    var comicsList = emptyList<СomicsModel>()
         private set
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicsViewHolder {
@@ -35,26 +31,29 @@ class ComicsAdapter() : RecyclerView.Adapter<ComicsAdapter.ComicsViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return heroesList.size
+        return comicsList.size
     }
+
     override fun onBindViewHolder(holder: ComicsViewHolder, position: Int) {
-        val item = heroesList[position]
-        holder.bind(item, mListener)
+        val item = comicsList[position]
+        holder.bind(item, mListener )
     }
+
     fun setData(newHeroes: List<СomicsModel>) {
-        val diffUtil = ComicsDiffUtil(heroesList, newHeroes)
+        val diffUtil = ComicsDiffUtil(comicsList, newHeroes)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
         heroesList = newHeroes
+        comicsList = newHeroes
         diffResults.dispatchUpdatesTo(this)
-
     }
 
     class ComicsViewHolder(
         private val binding: HeroItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(item: СomicsModel, clickListener: Listener) {
             val anim =
-                AnimationUtils.loadAnimation(binding.cardView.context, R.anim.error_fade_out,)
+                AnimationUtils.loadAnimation(binding.cardView.context, R.anim.error_fade_out)
                     .apply {
                         interpolator = AnticipateInterpolator()
                         setAnimationListener(object : Animation.AnimationListener {
@@ -70,19 +69,24 @@ class ComicsAdapter() : RecyclerView.Adapter<ComicsAdapter.ComicsViewHolder>() {
 
                         })
                     }
+            binding.cardView.setOnClickListener { clickListener.invoke(item.id) }
+            binding.heroTitle.text = item.name
+            Glide.with(binding.heroImage.context).load(item.thumbnail.getImageUrl())
+                .apply(
+                    RequestOptions.bitmapTransform(
+                        RoundedCornersTransformation(
+                            45,
+                            0
+                        )
+                    )
+                )
+                .into(binding.heroImage)
 
-            fun bind(item: СomicsModel) {
-                binding.heroTitle.text = item.name
-                Glide.with(binding.heroImage.context).load(item.thumbnail.path)
-                    .load(item.thumbnail.extension)
-                    .apply(RequestOptions.bitmapTransform(RoundedCornersTransformation(45, 0)))
-                    .into(binding.heroImage)
-
-                binding.cardView.setOnClickListener {
-                    binding.cardView.startAnimation(anim)
-                }
+            binding.cardView.setOnClickListener {
+                binding.cardView.startAnimation(anim)
             }
-
         }
+
     }
 }
+

@@ -1,5 +1,6 @@
 package com.example.diffutilsample.presentation.adapter
 
+import HeroDiffutil
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.Animation
